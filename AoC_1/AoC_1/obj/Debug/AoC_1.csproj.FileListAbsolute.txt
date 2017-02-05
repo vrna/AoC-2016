@@ -1,0 +1,6 @@
+C:\Users\Artturi\Documents\GitHub\AoC-2016\AoC_1\AoC_1\bin\Debug\AoC_1.exe.config
+C:\Users\Artturi\Documents\GitHub\AoC-2016\AoC_1\AoC_1\bin\Debug\AoC_1.exe
+C:\Users\Artturi\Documents\GitHub\AoC-2016\AoC_1\AoC_1\bin\Debug\AoC_1.pdb
+C:\Users\Artturi\Documents\GitHub\AoC-2016\AoC_1\AoC_1\obj\Debug\AoC_1.csprojResolveAssemblyReference.cache
+C:\Users\Artturi\Documents\GitHub\AoC-2016\AoC_1\AoC_1\obj\Debug\AoC_1.exe
+C:\Users\Artturi\Documents\GitHub\AoC-2016\AoC_1\AoC_1\obj\Debug\AoC_1.pdb
