@@ -24,14 +24,15 @@ public class AoC_2_9Grid {
         
         //String inputfile = args[0];
         String inputFile = "C:\\Users\\Artturi\\Documents\\GitHub\\AoC-2016\\finalinput.txt";
+        String gridFile = "C:\\Users\\Artturi\\Documents\\GitHub\\AoC-2016\\complexGrid.txt";
         
         // initialize your grid to create the keypad
-        Grid myGrid = new Grid();
+        Grid myGrid = new Grid(gridFile);
        
-        myGrid.addRow("1","2","3");
-        myGrid.addRow("4","5","6");
-        myGrid.addRow("7","8","9");
-        myGrid.setStartingLocation(1,1);
+        //myGrid.addRow("1","2","3");
+        //myGrid.addRow("4","5","6");
+        //myGrid.addRow("7","8","9");
+        myGrid.setStartingLocation("5");
         
         
         String finalCode = new String("");
