@@ -25,5 +25,5 @@ for line in lines:
 	# verify the checksum
 	if mychecksum == checksum:
 		total += sectorid
-		print name
+		print name + "," + str(sectorid)
 print total
