@@ -25,7 +25,7 @@ class myThread (threading.Thread):
 		global code
 		print "Starting " + self.name
 		while "-" in code :
-			print self.name + " checking thru " + str(self.st) + "-" + str(self.end)
+			#print self.name + " checking thru " + str(self.st) + "-" + str(self.end)
 			for n in xrange(self.st, self.end):
 				md5 = hashlib.md5()
 				md5.update(input + str(n))
