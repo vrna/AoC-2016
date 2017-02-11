@@ -18,3 +18,5 @@ while "-" in code:
 	i += 1
 print "final: " + "".join(code)
 print "time: " + str(time.time() - start_time)
+# 863dde27
+# took 53s
