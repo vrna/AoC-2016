@@ -1,0 +1,30 @@
+The first floor contains a polonium generator, a thulium generator, a thulium-compatible microchip, a promethium generator, a ruthenium generator, a ruthenium-compatible microchip, a cobalt generator, and a cobalt-compatible microchip.
+The second floor contains a polonium-compatible microchip and a promethium-compatible microchip.
+The third floor contains nothing relevant.
+The fourth floor contains nothing relevant.
+
+4
+3
+2   PoM PrM
+1 E PoG TG  TM  PrG RG  RM  CG  CM
+
+The first floor contains a hydrogen-compatible microchip and a lithium-compatible microchip.
+The second floor contains a hydrogen generator.
+The third floor contains a lithium generator.
+The fourth floor contains nothing relevant.
+
+F4 .  .  .  .  .
+F3 .  .  .  LG .
+F2 .  HG .  .  .
+F1 E  .  HM .  LM
+
+- if a chip is ever left in the same area as another RTG, and it's not connected to its own RTG, the chip will be fried
+- Its capacity rating means it can carry at most yourself and two RTGs or microchips in any combination.
+- the elevator will only function if it contains at least one RTG or microchip
+
+- identify state
+- identify all possible actions
+- simulate all possible states
+- if state results in fried state, close the path
+- if state results in state "all objects in fourth floor", count the steps and rock on!
+- loop on
