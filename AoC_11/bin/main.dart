@@ -8,6 +8,7 @@ Queue<State> queue_ = new Queue<State>();
 
 main(List<String> args) {
 
+  Stopwatch stopwatch = new Stopwatch()..start();
   State initial = init("input2.txt");
 
   queue_.add(initial);
@@ -18,14 +19,31 @@ main(List<String> args) {
     print(finalState.printState());
     print(finalState.depth_);
   }
-
-
+  print("steps: " + steps_.toString());
+  print('Code executed in ${stopwatch.elapsed}');
 }
+int latestDepth_ = -1;
+int steps_ = 0;
 
 State processQueue() {
   while( queue_.isNotEmpty) {
+    // debugs
+    steps_++;
+    if( steps_ % 100000 == 0) {
+      print("steps: " + steps_.toString());
+    }
+
     State current = queue_.removeFirst();
 
+    int currentDepth = current.depth_;
+
+    // debug
+    if(currentDepth > latestDepth_) {
+      print("depth: " + currentDepth.toString());
+      latestDepth_ = currentDepth;
+    }
+
+    //Ddebug
     if(debug) {
       print(current.depth_.toString());
       print(current.printState());
@@ -95,7 +113,7 @@ class State {
   State() {
   }
 
-  String hash() {
+  String simplehash() {
     String floorDelimiter = "[F]";
     String particleDelimiter = "-";
     String hash = "";
@@ -117,6 +135,53 @@ class State {
     }
 
     return hash;
+  }
+  String hash() {
+    String floorDelimiter = "[F]";
+    String particleDelimiter = "-";
+    String hash = "";
+
+    for(Floor f in floors_) {
+      if(f.elevator_ != null) {
+        hash += "E";
+        hash += particleDelimiter;
+      }
+
+      List<String> hashed = new List<String>();
+      for(Particle p in f.particles_) {
+        hashed.add(p.print());
+      }
+
+      hashed.sort();
+
+      hash += crypt(hashed,particleDelimiter);
+      hash += floorDelimiter;
+    }
+
+    return hash;
+  }
+
+  String crypt(List<String> hash, String del) {
+    HashMap<String,int> crtyptedCodes = new HashMap<String, int>();
+    int count = 0;
+    // switch materials to numbers
+    List<String> crypted = new List<String>();
+    for(String particle in hash) {
+      String code = particle.substring(0,2);
+      String type = particle.substring(2);
+
+
+      if(!crtyptedCodes.containsKey(code)) {
+        count++;
+        crtyptedCodes.putIfAbsent(code,() => count);
+      }
+
+      crypted.add( crtyptedCodes[code].toString() + type);
+
+
+    }
+
+    return crypted.join(del);
   }
 
   bool isValid() {
@@ -200,12 +265,8 @@ class State {
 
     // find combos
     List< List< Particle > > combos = new List< List<Particle>>();
-
     for( Particle prt in currentFloor.particles_) {
-      // it's possible to carry just one B)
-      List<Particle> lone = new List<Particle>();
-      lone.add(prt);
-      combos.add(lone);
+
 
       for( Particle innerPrt in currentFloor.particles_) {
         if( prt.type_ == "microchip" && innerPrt.type_ == "generator" && prt.type_ != innerPrt.type_) {
@@ -218,9 +279,14 @@ class State {
           combos.add(pair);
         }
       }
+      // it's possible to carry just one B)
+      List<Particle> lone = new List<Particle>();
+      lone.add(prt);
+      combos.add(lone);
     }
 
     for( List<Particle> pair in combos) {
+
       State movingUp = CopyState(floorIndex, 1, pair);
       State movingDown = CopyState(floorIndex, -1,pair);
 
@@ -236,8 +302,22 @@ class State {
     return possibleStates;
   }
 
+  bool belowFloorsEmpty(int floorIndex) {
+    for( int i = floorIndex - 1; i >= 0; --i ) {
+      if( floors_[i].particles_.length > 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   State CopyState(int floorIndex, int direction, List<Particle> pair) {
     if( floorIndex + direction < 0 || floorIndex + direction >= floors_.length) {
+      return null;
+    }
+
+    if( direction < 0 && belowFloorsEmpty(floorIndex) ) {
+      // check if below floors are empty, and don't move there if they are
       return null;
     }
 
@@ -261,7 +341,6 @@ class State {
 
     return copy;
   }
-
 
 }
 
