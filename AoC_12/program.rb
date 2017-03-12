@@ -55,5 +55,6 @@ while !instr.empty?
   #puts regs
   #STDIN.gets
 end
-# should be 318083
+# should be 318083 in part 1
+# should be 9227737 in part 2
 puts "register a: " + regs["a"].to_s
