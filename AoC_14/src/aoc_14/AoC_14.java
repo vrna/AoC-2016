@@ -27,7 +27,7 @@ public class AoC_14 {
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
-        //String input = "ahsbgdzn";
+        //String input = "abc";
         String input = "ahsbgdzn";
         Boolean part1 = false;
         ArrayList< Integer > keys = new ArrayList<Integer> ();
@@ -37,10 +37,6 @@ public class AoC_14 {
         Integer lastTriple = -1;
         Integer index = 0;
         while( true) {
-            if(index == 816)
-            {
-                String foo = "bar";
-            }
             String code = input + index.toString();
             // create a hash
             String hash = "";
@@ -87,6 +83,7 @@ public class AoC_14 {
                             if(item + 1000 >= index && item != index) 
                             {
                                 keys.add(item);
+                                //System.out.println("found from " + item.toString());
                                 // this is slow, remove when you find out why it not works
                                 //String orig = md5hash(input + item.toString());
                                 //String pair = md5hash(input + index.toString());
@@ -103,7 +100,7 @@ public class AoC_14 {
                 }
             }
             index++;
-            if( index > 30000)
+            if( index > 50000)
             {
                 break;
             }
