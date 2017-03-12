@@ -27,7 +27,9 @@ public class AoC_14 {
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
+        //String input = "ahsbgdzn";
         String input = "ahsbgdzn";
+        Boolean part1 = false;
         ArrayList< Integer > keys = new ArrayList<Integer> ();
         //ArrayList<Integer> triples = new ArrayList<Integer>();
         HashMap<String,ArrayList<Integer>> triples = new HashMap<String,ArrayList<Integer>>();
@@ -41,8 +43,15 @@ public class AoC_14 {
             }
             String code = input + index.toString();
             // create a hash
-            
-            String hash = md5hash(code);
+            String hash = "";
+            if(part1)
+            {
+                hash = md5hash(code);
+            }
+            else
+            {
+                hash = md5stretchedHash(code);
+            }
             // check if it contains three characters of one kind
             Pattern pattern3 = Pattern.compile("([a-z\\d])\\1\\1", Pattern.CASE_INSENSITIVE);
             
@@ -79,11 +88,11 @@ public class AoC_14 {
                             {
                                 keys.add(item);
                                 // this is slow, remove when you find out why it not works
-                                String orig = md5hash(input + item.toString());
-                                String pair = md5hash(input + index.toString());
-                                System.out.println("found pair in " + item.toString());
-                                System.out.println("o: " + orig + "(" + item.toString() + ")");
-                                System.out.println("å: " + pair + "(" + index.toString() + ")");
+                                //String orig = md5hash(input + item.toString());
+                                //String pair = md5hash(input + index.toString());
+                                //System.out.println("found pair in " + item.toString());
+                                //System.out.println("o: " + orig + "(" + item.toString() + ")");
+                                //System.out.println("å: " + pair + "(" + index.toString() + ")");
                                 if(keys.size() >= 64 && index > lastTriple + 1000)
                                 {
                                     break;
@@ -117,5 +126,30 @@ public class AoC_14 {
             sb.append(Integer.toString((arr[i] & 0xff) + 0x100, 16).substring(1));
         
         return sb.toString();
+    }
+    
+    public static String md5HexHash(String code) throws Exception {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] arr = md.digest(code.getBytes());
+        StringBuilder hexString = new StringBuilder();
+
+        for (int i = 0; i < arr.length; i++) {
+            String hex = Integer.toHexString(0xFF & arr[i]);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+
+        return hexString.toString();
+    }
+    
+    public static String md5stretchedHash(String code) throws Exception {
+        String hash = code;
+        for(int i = 0; i <= 2016; i++)
+        {
+            hash = md5HexHash(hash);
+        }
+        return hash;
     }
 }
