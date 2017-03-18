@@ -25,10 +25,10 @@ fun <- function(x,t) {
 }
 findzero <- function(d) {
   sum <- -1
-  time <- -1
+  time <- -2
   while( sum != 0 ) {
     sum <- 0
-    time <- time + 1
+    time <- time + 13
     #sum <- sum(apply(d,1,fun,t=time)) slow
     i <- 1
     while( i <= l & sum == 0)
