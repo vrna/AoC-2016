@@ -1,10 +1,7 @@
 # My first program in R Programming
 # print ( myString)
 
-starttime <- 0
-discIndex <- 1
-discLength <- 5
-discPos <- 4
+start.time <- Sys.time()
 
 # print( (starttime + discIndex + discLength + discPos ) %% discLength )
 f  <- readLines("input.txt")
@@ -26,18 +23,34 @@ for(i in 1:l) {
 fun <- function(x,t) {
   return ((t + x[1] + x[2] ) %% x[3])
 }
-
-sum <- -1
-time <- -1
-
-while( sum != 0 ) {
-  sum <- 0
-  time <- time + 1
-  for( i in 1:l )
-  {
-    sum = sum + fun( discs[i,],time )
+findzero <- function(d) {
+  sum <- -1
+  time <- -1
+  while( sum != 0 ) {
+    sum <- 0
+    time <- time + 1
+    #sum <- sum(apply(d,1,fun,t=time)) slow
+    i <- 1
+    while( i <= l & sum == 0)
+    {
+      sum <- sum + fun(d[i,],time)
+      i <- i + 1
+    }
   }
-  #print (sum)
+  time
 }
-# part 1 = 376777
+# part 1
+#print(discs)
+time <- findzero(discs)
 print (time)
+
+# part 2
+l <- l + 1
+disc7 <- c(l,0,11)
+discs <- rbind(discs,disc7)
+time <- findzero(discs)
+print (time)
+
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+print (time.taken)
