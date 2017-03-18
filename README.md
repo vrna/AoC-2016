@@ -14,6 +14,9 @@ Advent of Code 2016<br/>
 11. dart<br/>
 12. ruby<br/>
 13. ruby<br/>
+14. java+python<br/>
+15. R<br/>
+16. c++<br/>
 </p>
 ## thoughts so far
 
@@ -31,6 +34,8 @@ For the second day, I switched to Java using NetBeans.
 
 I have done some Java previously, and still, I don't know whether it's the tools I use or the language itself, but I'm not a friend of. To me, Java is maybe too much like c-sharp, but with some annoying little differences here and there.
 
+After doing day 14 with Java, I like it even less.
+
 ### javascript
 I continued using NetBeans, this time for JavaScript.
 
@@ -45,6 +50,8 @@ Python required a lot of googling. Notepad++ doesn't offer by default much intel
 
 Learning the libraries and taking full advantages of advanced scripting would be essential in this language.
 
+One thing though: I wrote day 14 first in Java, then recreated it with Python using practically the same structure, and ended up noticing that it run 2.5 times slower. Yet it was a lot quicker to work it otherwise.
+
 ### dart
 A co-worker told me about Dart and how that will be next hipster-programming language. Had to try. I installed JetBrains, leaving with 30 days to learn Dart with that tool, before I probably need to switch to Atom instead.
 
@@ -56,3 +63,15 @@ Time to move to Ruby, using Atom as development environment and command line.
 A new language to me. The day 12 was relatively simple, so this was a good moment to try.
 
 Not a good first experience. Had some challenges with my variables, as Ruby allows you to mix variable types in a creative ways, but provided several occasions where simple comparisons didn't work because it was too easy to mix a string and an integer in an array.
+
+### R
+I thought this was a mathmatical problem, and somehow I came up with R.
+
+After few hours of investigations, I had figured out that day 15 was about systems of equations and especially Systems of Linear Congruences.
+
+Yet the modulo part didn't come up anyway nicely, and the final solution was more like brute force that could be done with any language.
+
+So didn't quite get into the heart of it yet :(.
+
+### cpp
+After initial confusion with the setup (I thought NetBeans would have already installed me the required compilers and all), I got to play with c++. More thoughts maybe later.
