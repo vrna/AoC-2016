@@ -17,6 +17,10 @@ Advent of Code 2016<br/>
 14. java+python<br/>
 15. R<br/>
 16. c++<br/>
+17. python<br/>
+18. c++<br/>
+19. c++<br/>
+20. R<br/>
 </p>
 ## thoughts so far
 
