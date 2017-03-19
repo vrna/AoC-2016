@@ -16,6 +16,7 @@
 #include <list>
 #include <algorithm>
 #include <numeric>
+#include <iterator>
 using namespace std;
 
 /*
@@ -33,23 +34,67 @@ int main(int argc, char** argv) {
     list<int> elves(elfcount) ; 
     generate( elves.begin(), elves.end(), g);
     list<int>::iterator it = elves.begin();
-    
-    cout << endl;
-    while(elfcount > 1)
+    list<int>::iterator removable;
+    bool part1 = false;
+    if( part1 )
     {
-        ++it;
-        if(it == elves.end())
+        while(elfcount > 1)
         {
-            it = elves.begin();
+            //cout << "elf now: " << *it << endl;
+            removable = it;
+            ++removable;
+
+            if(removable == elves.end())
+            {
+                removable = elves.begin();
+            }
+            //cout << "remove " << *removable << endl;
+            elves.erase(removable);
+            elfcount--;
+
+            ++it;
+            if(it == elves.end())
+            {
+                it = elves.begin();
+            }
+            //cout << "elves: " << elfcount << endl;
+
         }
-        elves.erase(it++);
-        if(it == elves.end())
-        {
-            it = elves.begin();
-        }
-        elfcount--;
     }
-    
+    else
+    {
+        removable = it;
+        advance(removable, elfcount / 2);
+        bool even = (elfcount % 2 == 0);
+        while(elfcount > 1)
+        {
+            //cout << "elf now: " << *it << endl;
+            //cout << "remove " << *removable << endl;
+            elves.erase(removable++);
+            elfcount--;
+            even = !even;
+            
+            ++it;
+            if(it == elves.end())
+            {
+                it = elves.begin();
+            }
+
+            if(removable == elves.end())
+            {
+                removable = elves.begin();
+            }
+            if(even)
+            {
+                ++removable;
+
+                if(removable == elves.end())
+                {
+                    removable = elves.begin();
+                }
+            }
+        }
+    }
     cout << "winner: " << *(elves.begin()) << endl;
     return 0;
 }
