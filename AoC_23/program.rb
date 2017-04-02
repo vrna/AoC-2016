@@ -1,5 +1,11 @@
 # this is a comment, isn't it?
 # sooo, initaliaze
+#a: 6  -> 6810 0.10
+#a: 7  -> 11130 0.25
+#a: 8  -> 46410 1.67
+#a: 9  -> 368970 12.20
+#a: 10 -> 3634890 122.71
+start = Time.now
 inputfilename = "real.in"
 instructions = IO.readlines(inputfilename)
 debug = FALSE
@@ -7,12 +13,11 @@ index = 0
 instr = instructions[index]
 regs = Hash["a" => 0, "b" => 0, "c" => 0, "d" => 0]
 #if ARGV.size > 1
-regs["a"] = 7
+regs["a"] = ARGV[0]
 #end
-phase = 0
-try = 67135
+
 while !instr.empty?
-  phase += 1
+  
   if debug
     puts instr
   end
@@ -20,8 +25,15 @@ while !instr.empty?
   arguments = instr.split(" ")
   command = arguments[0]
   register = arguments[1]
+  if index == 5
+    #puts "jump 1"
+    step = 0
+    regs['a'] += (regs['d'] ) * regs['c']
+    regs['c'] = 0
+    regs['d'] = 0
+    index = 10
   # cpy x y: x either a register or a nr
-  if command == "cpy"
+  elsif command == "cpy"
     sourceR = arguments[1]
     targetR = arguments[2]
     value = nil
@@ -108,10 +120,12 @@ while !instr.empty?
     puts regs
     STDIN.gets
   else
-    puts phase.to_s + ": " + regs.to_s
+    #puts phase.to_s + ": " + regs.to_s
   end
 
 end
 # should be 318083 in part 1
 # should be 9227737 in part 2
 puts "register a: " + regs["a"].to_s
+finish = Time.now
+puts (finish - start).to_s
