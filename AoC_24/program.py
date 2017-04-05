@@ -89,6 +89,7 @@ def findDistances(nodes, grid):
     return distances
 
 inputfile = "real.in"
+part2 = True
 
 F = open(inputfile, "r")
 # handle row by row
@@ -124,6 +125,10 @@ for path in paths:
 
     for i in xrange(0,len(path)-1):
         pathLength += distances[ path[i] ][ path[i+1] ]
+
+    if part2:
+        # in part2, you also need to get back to 0
+        pathLength += distances[ path[-1]]["0"]
 
     if pathLength < smallestLength:
         smallestLength = pathLength
